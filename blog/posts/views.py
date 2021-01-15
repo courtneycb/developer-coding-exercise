@@ -54,6 +54,20 @@ def posts(request):
 
 
 @api_view(['GET'])
+def post_detail(request, slug):
+    """
+    A view that returns post data (for a singular post) in JSON.
+
+    Args:
+        request: HttpRequest object.
+        slug: The slug of the requested post.
+    """
+    post = get_object_or_404(Post, slug=slug)
+    serializer = PostSerializer(post)
+    return Response(serializer.data)
+
+
+@api_view(['GET'])
 def posts_list(request):
     """
     A view that returns post data (for all posts) in JSON.

@@ -25,4 +25,5 @@ urlpatterns = [
     path(r'admin/', admin.site.urls),
     path(r'posts/', include('posts.urls')),
     path(r'posts-list', views.posts_list, name='posts-list'),
+    path(r'post-detail/<slug:slug>', views.post_detail, name='post-detail')
 ]
