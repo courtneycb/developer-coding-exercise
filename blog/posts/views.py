@@ -1,5 +1,8 @@
 from django.shortcuts import get_object_or_404, render
 from posts.models import Post
+from posts.serializers import PostSerializer
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
 import markdown
 
 # Feel free to move this to a new file if you are carrying out the 'tags' calculation there
@@ -48,3 +51,16 @@ def posts(request):
     context = dict()
     context["posts"] = Post.objects.order_by('title')
     return render(request, "posts/index.html", context)
+
+
+@api_view(['GET'])
+def posts_list(request):
+    """
+    A view that returns post data (for all posts) in JSON.
+
+    Args:
+        request: HttpRequest object.
+    """
+    posts = Post.objects.all()
+    serializer = PostSerializer(posts, many=True)
+    return Response(serializer.data)
