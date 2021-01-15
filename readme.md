@@ -2,27 +2,23 @@
 
 To get the project up and running:
 
-- Create and activate a virtual environment. For example:
-
+Create and activate a virtual environment. For example:
 ```
 $ python3 -m virtualenv --python=python3.x venv
 $ . venv/bin/activate
 ```
 
-- Install packages into the environment:
-
+Install packages into the environment:
 ```
 pip3 install -r blog/requirements.txt
 ```
 
-- Load the post data into the Database:
-
+Load the post data into the Database:
 ```
 python3 blog/manage.py loadposts
 ```
 
-- Run the server
-
+Run the server:
 ```
 ./run_django.sh
 ```
