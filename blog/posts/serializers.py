@@ -4,8 +4,13 @@ from rest_framework import serializers
 from posts.models import Post
 
 
-class PostSerializer(serializers.ModelSerializer):
+class PostSerializer(serializers.HyperlinkedModelSerializer):
     """Serializer for blog posts."""
+
+    url = serializers.HyperlinkedIdentityField(
+        view_name='post-detail',
+        lookup_field='slug'
+    )
 
     class Meta:
         """Meta settings for serializer."""
@@ -15,4 +20,6 @@ class PostSerializer(serializers.ModelSerializer):
             'title',
             'author',
             'content',
+            'tags',
+            'url'
         )

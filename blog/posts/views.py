@@ -41,7 +41,7 @@ def post_detail(request, slug):
         slug: The slug of the requested post.
     """
     post = get_object_or_404(Post, slug=slug)
-    serializer = PostSerializer(post)
+    serializer = PostSerializer(post, context={'request': request})
     return Response(serializer.data)
 
 
@@ -54,5 +54,5 @@ def posts_list(request):
         request: HttpRequest object.
     """
     posts = Post.objects.all()
-    serializer = PostSerializer(posts, many=True)
+    serializer = PostSerializer(posts, many=True, context={'request': request})
     return Response(serializer.data)
