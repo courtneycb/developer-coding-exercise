@@ -27,12 +27,12 @@ Open your preferred web browser to the URL localhost:3000 and you should see a l
 
 You can test the API from the command line.
 
-To get the list of posts and their data:
+To get the list of posts:
 ```
 curl http://localhost:3000/posts-list Accept:application/json
 ```
 
-To get a singular post and it's data:
+To get a singular post:
 ```
 curl http://localhost:3000/post-detail/<slug> Accept:application/json
 ```
