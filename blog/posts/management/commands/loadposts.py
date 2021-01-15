@@ -2,6 +2,7 @@ import os
 from django.core.management.base import BaseCommand
 from blog.settings import BASE_DIR
 from posts.models import Post
+from utils.get_tags import get_tags
 
 
 class Command(BaseCommand):
@@ -27,13 +28,15 @@ class Command(BaseCommand):
             slug = heading[2].replace('Slug: ', '')
 
             content = file_content[1] # The blog post content as a string
-            
+            tags = get_tags(content)
+
             # Create blog post object and save to the db
             post = Post(
                 slug=slug.strip(),
                 title=title.strip(),
                 author=author.strip(),
-                content=content.strip()
+                content=content.strip(),
+                tags=tags,
             )
 
             post.save()

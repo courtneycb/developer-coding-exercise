@@ -10,3 +10,4 @@ class Post(models.Model):
     title = models.CharField(max_length=SMALL)
     author = models.CharField(max_length=SMALL)
     content = models.TextField()
+    tags = models.CharField(max_length=SMALL, default='')
