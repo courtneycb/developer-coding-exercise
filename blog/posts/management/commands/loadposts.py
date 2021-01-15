@@ -1,6 +1,6 @@
 import os
 from django.core.management.base import BaseCommand
-# from django.conf import settings
+from blog.settings import BASE_DIR
 from posts.models import Post
 
 
@@ -10,7 +10,7 @@ class Command(BaseCommand):
     help = "Converts Markdown files listed under assets/posts and stores"
 
     def handle(self, *args, **options):
-        PATH = os.path.abspath('../assets/posts')
+        PATH = os.path.join(BASE_DIR, '../assets/posts')
         SEPARATOR = '==='
 
         # For every blog post markdown file

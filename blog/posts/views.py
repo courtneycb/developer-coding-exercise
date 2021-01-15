@@ -1,3 +1,7 @@
+from django.shortcuts import get_object_or_404, render
+from posts.models import Post
+import markdown
+
 # Feel free to move this to a new file if you are carrying out the 'tags' calculation there
 stopWords = [
     "#", "##", "a", "about", "above", "after", "again", "against", "all", "am",
@@ -21,9 +25,26 @@ stopWords = [
     "yourself", "yourselves"
 ]
 
-def post(request, slug):
-    pass
+def post(request, post_slug):
+    """View for a specific post in the posts application.
+
+    Args:
+        request: HttpRequest object.
+        post_slug: The slug of the requested post.
+    """
+    post = get_object_or_404(Post, slug=post_slug)
+    context = dict()
+    context["post"] = post
+    context["content_html"] = markdown.markdown(post.content)
+    return render(request, "posts/post.html", context)
 
 
 def posts(request):
-    pass
+    """View for all posts in the posts application.
+
+    Args:
+        request: HttpRequest object.
+    """
+    context = dict()
+    context["posts"] = Post.objects.order_by('title')
+    return render(request, "posts/index.html", context)
